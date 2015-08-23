@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PagoProveedorCreateDlg" widgetVar="PagoProveedorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePagoProveedorTitle}">
+            <h:form id="PagoProveedorCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pagoProveedorController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePagoProveedorLabel_idPagoProveedor}" for="idPagoProveedor" />
+                        <p:inputText id="idPagoProveedor" value="#{pagoProveedorController.selected.idPagoProveedor}" title="#{bundle.CreatePagoProveedorTitle_idPagoProveedor}" required="true" requiredMessage="#{bundle.CreatePagoProveedorRequiredMessage_idPagoProveedor}"/>
+                        <p:outputLabel value="#{bundle.CreatePagoProveedorLabel_montoActualPago}" for="montoActualPago" />
+                        <p:inputText id="montoActualPago" value="#{pagoProveedorController.selected.montoActualPago}" title="#{bundle.CreatePagoProveedorTitle_montoActualPago}" />
+                        <p:outputLabel value="#{bundle.CreatePagoProveedorLabel_idFacturaprov}" for="idFacturaprov" />
+                        <p:selectOneMenu id="idFacturaprov" value="#{pagoProveedorController.selected.idFacturaprov}" required="true" requiredMessage="#{bundle.EditPagoProveedorRequiredMessage_idFacturaprov}">
+                            <f:selectItems value="#{facturaProveedorController.itemsAvailableSelectOne}"
+                                           var="idFacturaprovItem"
+                                           itemValue="#{idFacturaprovItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pagoProveedorController.create}" value="#{bundle.Save}" update="display,:PagoProveedorListForm:datalist,:growl" oncomplete="handleSubmit(args,'PagoProveedorCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PagoProveedorCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

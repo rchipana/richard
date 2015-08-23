@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FacturaProveedorViewDlg" widgetVar="FacturaProveedorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewFacturaProveedorTitle}">
+            <h:form id="FacturaProveedorViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{facturaProveedorController.selected != null}">
+                        <h:outputText value="#{bundle.ViewFacturaProveedorLabel_idFacturaprov}"/>
+                        <h:outputText value="#{facturaProveedorController.selected.idFacturaprov}" title="#{bundle.ViewFacturaProveedorTitle_idFacturaprov}"/>
+                        <h:outputText value="#{bundle.ViewFacturaProveedorLabel_tipoPagoFact}"/>
+                        <h:outputText value="#{facturaProveedorController.selected.tipoPagoFact}" title="#{bundle.ViewFacturaProveedorTitle_tipoPagoFact}"/>
+                        <h:outputText value="#{bundle.ViewFacturaProveedorLabel_fechaFact}"/>
+                        <h:outputText value="#{facturaProveedorController.selected.fechaFact}" title="#{bundle.ViewFacturaProveedorTitle_fechaFact}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewFacturaProveedorLabel_fechaPago}"/>
+                        <h:outputText value="#{facturaProveedorController.selected.fechaPago}" title="#{bundle.ViewFacturaProveedorTitle_fechaPago}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewFacturaProveedorLabel_totalFact}"/>
+                        <h:outputText value="#{facturaProveedorController.selected.totalFact}" title="#{bundle.ViewFacturaProveedorTitle_totalFact}"/>
+                        <h:outputText value="#{bundle.ViewFacturaProveedorLabel_estadoFact}"/>
+                        <h:outputText value="#{facturaProveedorController.selected.estadoFact}" title="#{bundle.ViewFacturaProveedorTitle_estadoFact}"/>
+                        <h:outputText value="#{bundle.ViewFacturaProveedorLabel_idProveedor}"/>
+                        <h:outputText value="#{facturaProveedorController.selected.idProveedor}" title="#{bundle.ViewFacturaProveedorTitle_idProveedor}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="FacturaProveedorViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

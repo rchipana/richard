@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+
+        <h:form id="CitaMedicaCreateCalendarForm">
+
+            <p:schedule id="idSchedule" widgetVar="myschedule" timeZone="GMT-5" 
+                        value="#{citaMedicaController.eventModel}" >
+                <p:ajax event="eventSelect" listener="#{citaMedicaController.cuandoSelecciono}" update="myPanel"
+                        oncomplete="PF('MydlgDaialog').show()" />  
+                <p:ajax event="dateSelect" listener="#{citaMedicaController.nuevoRegistro}" update="myPanel"
+                        oncomplete="PF('MydlgDaialog').show()" />
+                <p:commandButton value="sdggsdgs"/>
+            </p:schedule>
+
+      <!--      <p:dialog header="Registra Cita"  resizable="false" modal="true" appendTo="@(body)"
+                      id="Mydlg" widgetVar="MydlgDaialog" showEffect="clip">
+                <p:outputPanel id="myPanel">
+                    <h:panelGrid columns="2" rendered="#{citaMedicaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCitaMedicaLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy HH:mm:ss" value="#{citaMedicaController.selected.fechaInicio}" 
+                                    title="#{bundle.EditCitaMedicaTitle_fechaInicio}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCitaMedicaLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy HH:mm:ss" value="#{citaMedicaController.selected.fechaFin}" 
+                                    title="#{bundle.EditCitaMedicaTitle_fechaFin}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCitaMedicaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{citaMedicaController.selected.descripcion}" 
+                                     title="#{bundle.CreateCitaMedicaTitle_descripcion}" />
+                        <p:outputLabel value="Asociado" for="idAs" />
+                        <p:selectOneMenu id="idAs" value="#{citaMedicaController.selected.idAsociado}" style="width: 400px"
+                                         filter="true" filterMatchMode="contains">
+
+                            <f:selectItems value="#{citaMedicaController.list_Asociado}"
+                                           var="idAso" itemLabel="#{idAso.nombreCompleto}"
+                                           itemValue="#{idAso}"/>
+                            <p:ajax event="change" listener="#{citaMedicaController.listar_mascotas_Asc}" update="@form" process="@this"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Mascota" for="idMascota" />
+                        <p:selectOneMenu id="idMascota" value="#{citaMedicaController.selected.idMascota}" style="width: 400px">
+
+                            <f:selectItems value="#{citaMedicaController.list_Mascota}"
+                                           var="idMascotaItem" itemLabel="#{idMascotaItem.nombre}"
+                                           itemValue="#{idMascotaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Medico" for="med" />
+                        <p:selectOneMenu id="med" value="#{citaMedicaController.selected.idEmpleado}" style="width: 400px">
+
+                            <f:selectItems value="#{citaMedicaController.list_Empleado}"
+                                           var="empleaddo" itemLabel="#{empleaddo.nombreCompleto}"
+                                           itemValue="#{empleaddo}"/>
+                        </p:selectOneMenu>
+                        <p:commandButton value="Actualizar" actionListener="#{citaMedicaController.gurdarCita}" 
+                                         update="idSchedule"  process="@this"
+                                         oncomplete="if (args &amp;&amp; !args.validationFailed) PF('MydlgDaialog').hide()"  />
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+      -->
+        </h:form>
+
+
+
+    </ui:composition>
+
+
+</html>

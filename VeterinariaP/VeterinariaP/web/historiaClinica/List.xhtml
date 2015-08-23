@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListHistoriaClinicaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="HistoriaClinicaListForm">
+                <p:panel header="#{bundle.ListHistoriaClinicaTitle}">
+                    <p:dataTable id="datalist" value="#{historiaClinicaController.items}" var="item"
+                                 selectionMode="single" selection="#{historiaClinicaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idHistoriaClinica}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>  
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriaClinicaTitle_idMascota}"/>
+                            </f:facet>
+                             <h:outputText value="#{item.idAsociado.nombreCompletoS}"/>
+                        </p:column>
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriaClinicaTitle_idMascota}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idMascota.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriaClinicaTitle_fechaReg}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaReg}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriaClinicaTitle_peso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.peso}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriaClinicaTitle_talla}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.talla}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriaClinicaTitle_mucosas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mucosas}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriaClinicaTitle_anamnesis}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anamnesis}"/>
+                        </p:column>                      
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriaClinicaTitle_tratamiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tratamiento}"/>
+                        </p:column>
+                  
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{historiaClinicaController.prepareCreate}" update=":HistoriaClinicaCreateForm" oncomplete="PF('HistoriaClinicaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":HistoriaClinicaViewForm" oncomplete="PF('HistoriaClinicaViewDialog').show()" disabled="#{empty historiaClinicaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":HistoriaClinicaEditForm" oncomplete="PF('HistoriaClinicaEditDialog').show()" disabled="#{empty historiaClinicaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{historiaClinicaController.destroy}" update=":growl,datalist" disabled="#{empty historiaClinicaController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AccesoViewDlg" widgetVar="AccesoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAccesoTitle}">
+            <h:form id="AccesoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{accesoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAccesoLabel_idoacceso}"/>
+                        <h:outputText value="#{accesoController.selected.idoacceso}" title="#{bundle.ViewAccesoTitle_idoacceso}"/>
+                        <h:outputText value="#{bundle.ViewAccesoLabel_idTipoEmpleado}"/>
+                        <h:outputText value="#{accesoController.selected.idTipoEmpleado}" title="#{bundle.ViewAccesoTitle_idTipoEmpleado}"/>
+                        <h:outputText value="#{bundle.ViewAccesoLabel_idopcion}"/>
+                        <h:outputText value="#{accesoController.selected.idopcion}" title="#{bundle.ViewAccesoTitle_idopcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AccesoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DetallePagoCreateDlg" widgetVar="DetallePagoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDetallePagoTitle}">
+            <h:form id="DetallePagoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{detallePagoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDetallePagoLabel_idDetallePago}" for="idDetallePago" />
+                        <p:inputText id="idDetallePago" value="#{detallePagoController.selected.idDetallePago}" title="#{bundle.CreateDetallePagoTitle_idDetallePago}" required="true" requiredMessage="#{bundle.CreateDetallePagoRequiredMessage_idDetallePago}"/>
+                        <p:outputLabel value="#{bundle.CreateDetallePagoLabel_tipoPago}" for="tipoPago" />
+                        <p:inputText id="tipoPago" value="#{detallePagoController.selected.tipoPago}" title="#{bundle.CreateDetallePagoTitle_tipoPago}" />
+                        <p:outputLabel value="#{bundle.CreateDetallePagoLabel_numeroDocl}" for="numeroDocl" />
+                        <p:inputText id="numeroDocl" value="#{detallePagoController.selected.numeroDocl}" title="#{bundle.CreateDetallePagoTitle_numeroDocl}" />
+                        <p:outputLabel value="#{bundle.CreateDetallePagoLabel_fechaPago}" for="fechaPago" />
+                        <p:inputText id="fechaPago" value="#{detallePagoController.selected.fechaPago}" title="#{bundle.CreateDetallePagoTitle_fechaPago}" />
+                        <p:outputLabel value="#{bundle.CreateDetallePagoLabel_montoPagado}" for="montoPagado" />
+                        <p:inputText id="montoPagado" value="#{detallePagoController.selected.montoPagado}" title="#{bundle.CreateDetallePagoTitle_montoPagado}" />
+                        <p:outputLabel value="#{bundle.CreateDetallePagoLabel_detallePagocol}" for="detallePagocol" />
+                        <p:inputText id="detallePagocol" value="#{detallePagoController.selected.detallePagocol}" title="#{bundle.CreateDetallePagoTitle_detallePagocol}" />
+                        <p:outputLabel value="#{bundle.CreateDetallePagoLabel_idFacturaprov}" for="idFacturaprov" />
+                        <p:selectOneMenu id="idFacturaprov" value="#{detallePagoController.selected.idFacturaprov}" required="true" requiredMessage="#{bundle.EditDetallePagoRequiredMessage_idFacturaprov}">
+                            <f:selectItems value="#{pagoProveedorController.itemsAvailableSelectOne}"
+                                           var="idFacturaprovItem"
+                                           itemValue="#{idFacturaprovItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{detallePagoController.create}" value="#{bundle.Save}" update="display,:DetallePagoListForm:datalist,:growl" oncomplete="handleSubmit(args,'DetallePagoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DetallePagoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

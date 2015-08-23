@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SedeViewDlg" widgetVar="SedeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSedeTitle}">
+            <h:form id="SedeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sedeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSedeLabel_idSede}"/>
+                        <h:outputText value="#{sedeController.selected.idSede}" title="#{bundle.ViewSedeTitle_idSede}"/>
+                        <h:outputText value="#{bundle.ViewSedeLabel_descripcion}"/>
+                        <h:outputText value="#{sedeController.selected.descripcion}" title="#{bundle.ViewSedeTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewSedeLabel_direccion}"/>
+                        <h:outputText value="#{sedeController.selected.direccion}" title="#{bundle.ViewSedeTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewSedeLabel_idDistrito}"/>
+                        <h:outputText value="#{sedeController.selected.idDistrito}" title="#{bundle.ViewSedeTitle_idDistrito}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SedeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

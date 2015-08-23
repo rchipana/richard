@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OpcionEditDlg" widgetVar="OpcionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditOpcionTitle}">
+            <h:form id="OpcionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{opcionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditOpcionLabel_idopcion}" for="idopcion" />
+                        <p:inputText id="idopcion" value="#{opcionController.selected.idopcion}" title="#{bundle.EditOpcionTitle_idopcion}" required="true" requiredMessage="#{bundle.EditOpcionRequiredMessage_idopcion}"/>
+                        <p:outputLabel value="#{bundle.EditOpcionLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{opcionController.selected.descripcion}" title="#{bundle.EditOpcionTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditOpcionLabel_ruta}" for="ruta" />
+                        <p:inputText id="ruta" value="#{opcionController.selected.ruta}" title="#{bundle.EditOpcionTitle_ruta}" />
+                        <p:outputLabel value="#{bundle.EditOpcionLabel_imagen}" for="imagen" />
+                        <p:inputText id="imagen" value="#{opcionController.selected.imagen}" title="#{bundle.EditOpcionTitle_imagen}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{opcionController.update}" value="#{bundle.Save}" update="display,:OpcionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OpcionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OpcionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditoriaViewDlg" widgetVar="AuditoriaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAuditoriaTitle}">
+            <h:form id="AuditoriaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{auditoriaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAuditoriaLabel_idAuditoria}"/>
+                        <h:outputText value="#{auditoriaController.selected.idAuditoria}" title="#{bundle.ViewAuditoriaTitle_idAuditoria}"/>
+                        <h:outputText value="#{bundle.ViewAuditoriaLabel_fechaLogin}"/>
+                        <h:outputText value="#{auditoriaController.selected.fechaLogin}" title="#{bundle.ViewAuditoriaTitle_fechaLogin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAuditoriaLabel_fechaLogout}"/>
+                        <h:outputText value="#{auditoriaController.selected.fechaLogout}" title="#{bundle.ViewAuditoriaTitle_fechaLogout}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAuditoriaLabel_user}"/>
+                        <h:outputText value="#{auditoriaController.selected.user}" title="#{bundle.ViewAuditoriaTitle_user}"/>
+                        <h:outputText value="#{bundle.ViewAuditoriaLabel_tiempo}"/>
+                        <h:outputText value="#{auditoriaController.selected.tiempo}" title="#{bundle.ViewAuditoriaTitle_tiempo}"/>
+                        <h:outputText value="#{bundle.ViewAuditoriaLabel_idSede}"/>
+                        <h:outputText value="#{auditoriaController.selected.idSede}" title="#{bundle.ViewAuditoriaTitle_idSede}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AuditoriaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

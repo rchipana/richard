@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MascotaCreateDlg" widgetVar="MascotaCreateDialog" modal="true" height="50%"  
+                  resizable="false" appendTo="@(body)" header="#{bundle.CreateMascotaTitle}">
+            <h:form id="MascotaCreateForm">
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2" rendered="#{mascotaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMascotaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{mascotaController.selected.nombre}" 
+                                       onblur="this.value = this.value.toUpperCase();"
+                                     title="#{bundle.CreateMascotaTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateMascotaLabel_fechaNac}" for="fechaNac" />
+                        <p:calendar id="fechaNac" pattern="dd/MM/yyyy" value="#{mascotaController.selected.fechaNac}" 
+                                    navigator="true" locale="es"                                 
+                                    showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMascotaLabel_fechaIng}" for="fechaIng" />
+                        <p:calendar id="fechaIng" pattern="dd/MM/yyyy" value="#{mascotaController.selected.fechaIng}" 
+                                    navigator="true" locale="es"                                 
+                                    showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMascotaLabel_sexo}" for="sexo" />
+                        <p:selectOneMenu id="sexo" value="#{mascotaController.selected.sexo}" >
+                            <f:selectItem itemLabel="----" itemValue="#{null}"/> 
+                            <f:selectItem itemLabel="MACHO" itemValue="#{mascotaController.uno}"/>
+                            <f:selectItem itemLabel="HEMBRA" itemValue="#{mascotaController.cero}"/>
+
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMascotaLabel_castrado}" for="castrado" />
+                        <p:selectOneMenu id="castrado" value="#{mascotaController.selected.castrado}" 
+                                         >
+                            <f:selectItem itemLabel="----" itemValue="#{null}"/> 
+                            <f:selectItem itemLabel="SI" itemValue="#{mascotaController.uno}"/>
+                            <f:selectItem itemLabel="NO" itemValue="#{mascotaController.cero}"/>
+
+                        </p:selectOneMenu>                  
+                        <p:outputLabel value="Especie" for="idPelaje" />
+                        <p:selectOneMenu id="idPelaje" value="#{mascotaController.selected.idPelaje}" 
+                                         required="true" requiredMessage="#{bundle.EditMascotaRequiredMessage_idPelaje}">
+                            <f:selectItem itemLabel="--------" itemValue="#{null}"/>
+                            <f:selectItems value="#{mascotaController.list_Especie}"
+                                           var="idPelajeItem" itemLabel="#{idPelajeItem.descripcion}"
+                                           itemValue="#{idPelajeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Asociado"  />
+                        <p:selectOneMenu  value="#{mascotaController.selected.idAsociado}" filter="true"
+                                          effect="fade" filterMatchMode="contains" panelStyle="width:400px"
+                                          style="width: 400px" >
+                            <f:selectItem itemLabel="--------" itemValue="#{null}"/>
+                            <f:selectItems value="#{mascotaController.list_asociado}" 
+                                           var="asociado" itemLabel="#{asociado.nombreCompleto} "
+                                           itemValue="#{asociado}"/>
+                        </p:selectOneMenu>  
+                        <p:outputLabel value="" rendered="#{mascotaController.visibleLicCond}"/>
+                        <h:panelGroup id="pnlFoto">
+                            <p:fileUpload id="idFoto" label="foto" disabled="#{mascotaController.disabledFoto}"
+                                          invalidFileMessage="#{bundle.fileUpload_InvalidFileMessageFoto}"
+                                          fileUploadListener="#{mascotaController.handleFileUpload}"
+                                          mode="advanced" dragDropSupport="false"
+                                          multiple="false"
+                                          auto="true" update="pnlFoto pnlFoto2 pnlFoto3 " 
+                                          allowTypes="/(\.|\/)(jpg|jpeg)$/" immediate="true" />
+                        </h:panelGroup>
+                    </h:panelGrid>
+
+                    <h:panelGrid id="pnlFoto2" columns="2" >
+                        <p:outputLabel value="#{mascotaController.fotoFile==null?'':mascotaController.fotoFile.fileName}" />
+                        <p:commandButton ajax="true"  disabled="#{mascotaController.disabledFoto}"
+                                         rendered="#{mascotaController.fotoFile!=null}"
+                                         actionListener="#{mascotaController.removeFile}" 
+                                         icon="ui-icon-close" 
+                                         title="Eliminar"  
+                                         process="@this" 
+                                         update="pnlFoto pnlFoto2 pnlFoto3 @form" />
+                    </h:panelGrid>
+
+                    <h:panelGrid id="pnlFoto3" columns="1">
+                        <p:graphicImage value="#{mascotaController.fotoImg}" cache="false" width="200" height="200">
+                        </p:graphicImage>
+                    </h:panelGrid>
+                    <p:commandButton actionListener="#{mascotaController.create}" value="#{bundle.Save}" 
+                                     update="display,:MascotaListForm:datalist,:growl" 
+                                       oncomplete="if (args &amp;&amp; !args.validationFailed) PF('MascotaCreateDialog').hide()" 
+                                     />
+                    <p:commandButton value="#{bundle.Cancel}" oncomplete="PF('MascotaCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoCambioCreateDlg" widgetVar="TipoCambioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTipoCambioTitle}">
+            <h:form id="TipoCambioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoCambioController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTipoCambioLabel_idTipoCambio}" for="idTipoCambio" />
+                        <p:inputText id="idTipoCambio" value="#{tipoCambioController.selected.idTipoCambio}" title="#{bundle.CreateTipoCambioTitle_idTipoCambio}" required="true" requiredMessage="#{bundle.CreateTipoCambioRequiredMessage_idTipoCambio}"/>
+                        <p:outputLabel value="#{bundle.CreateTipoCambioLabel_valorCompra}" for="valorCompra" />
+                        <p:inputText id="valorCompra" value="#{tipoCambioController.selected.valorCompra}" title="#{bundle.CreateTipoCambioTitle_valorCompra}" />
+                        <p:outputLabel value="#{bundle.CreateTipoCambioLabel_valorVenta}" for="valorVenta" />
+                        <p:inputText id="valorVenta" value="#{tipoCambioController.selected.valorVenta}" title="#{bundle.CreateTipoCambioTitle_valorVenta}" />
+                        <p:outputLabel value="#{bundle.CreateTipoCambioLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{tipoCambioController.selected.fecha}" title="#{bundle.EditTipoCambioTitle_fecha}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoCambioController.create}" value="#{bundle.Save}" update="display,:TipoCambioListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoCambioCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipoCambioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

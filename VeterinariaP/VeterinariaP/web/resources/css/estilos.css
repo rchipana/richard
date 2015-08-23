@@ -1,0 +1,45 @@
+/* 
+    Document   : estilos
+    Created on : 04/10/2013, 11:54:06 AM
+    Author     : Renato
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    font-size: 75% !important;
+   // background-image: url("/resources/imagenes/portada.jpg");
+    background-color: #cccccc;
+}
+
+.ui-dialog-content, .ui-dialog-titlebar
+{
+    font-size: 90% !important;
+}
+
+root { 
+    display: block;
+}
+
+input {
+    min-width: 300px;
+}
+
+// Transparencia en la busqueda de Tickets //
+.ui-panelgrid td, .ui-panelgrid tr
+{
+    border-style: none !important;
+    background: none !important;
+}
+
+.datatable-row-normal
+{
+}
+
+.datatable-row-alerta
+{
+    color: red;
+    background-color: yellow;
+}
+
+

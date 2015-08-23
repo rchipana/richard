@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DiagnosticoCreateDlg" widgetVar="DiagnosticoCreateDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="#{bundle.CreateDiagnosticoTitle}">
+            <h:form id="DiagnosticoCreateForm">
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2" rendered="#{diagnosticoController.selected != null}">
+                        <p:outputLabel value="Asociado" for="idAs" />
+                        <p:selectOneMenu id="idAs" value="#{diagnosticoController.asociado}" style="width: 500px"
+                                         filter="true" filterMatchMode="contains"
+                                         required="true" requiredMessage="#{bundle.EditCitaMedicaRequiredMessage_idMascota}">
+                            <f:selectItem itemValue="#{null}" itemLabel="-----"/>
+                            <f:selectItems value="#{diagnosticoController.list_Asociado}"
+                                           var="idAso" itemLabel="#{idAso.nombreCompleto}"
+                                           itemValue="#{idAso}"/>
+                            <p:ajax event="change" listener="#{diagnosticoController.listar_mascotas_AscD()}" update="idMascota"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Mascota" for="idMascota" />
+                        <p:selectOneMenu id="idMascota" value="#{diagnosticoController.mascota}" style="width: 400px"
+                                         required="true" >
+                            <f:selectItem itemValue="#{null}" itemLabel="-----"/>
+                            <f:selectItems value="#{diagnosticoController.list_Mascota}"
+                                           var="idMascotaItem" itemLabel="#{idMascotaItem.nombre}"
+                                           itemValue="#{idMascotaItem}"/>
+                            <p:ajax event="change" listener="#{diagnosticoController.list_Historia_Clinica()}" update="peso,talla,atendidoPor,mucosas"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDiagnosticoLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{diagnosticoController.selected.fecha}" 
+                                    title="#{bundle.EditDiagnosticoTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDiagnosticoLabel_peso}" for="peso" />
+                        <p:inputText id="peso" value="#{diagnosticoController.selected.peso}" 
+                                     title="#{bundle.CreateDiagnosticoTitle_peso}" />
+                        <p:outputLabel value="#{bundle.CreateDiagnosticoLabel_talla}" for="talla" />
+                        <p:inputText id="talla" value="#{diagnosticoController.selected.talla}" 
+                                     title="#{bundle.CreateDiagnosticoTitle_talla}" />
+                        <p:outputLabel value="#{bundle.CreateDiagnosticoLabel_atendidoPor}" for="atendidoPor" />
+                        <p:inputText id="atendidoPor" value="#{diagnosticoController.selected.atendidoPor}" 
+                                     title="#{bundle.CreateDiagnosticoTitle_atendidoPor}" />
+                        <p:outputLabel value="#{bundle.CreateDiagnosticoLabel_mucosas}" for="mucosas" />
+                        <p:inputText id="mucosas" value="#{diagnosticoController.selected.mucosas}" 
+                                     title="#{bundle.CreateDiagnosticoTitle_mucosas}" />
+                        <p:outputLabel value="#{bundle.CreateDiagnosticoLabel_motivo}" for="motivo" />
+                        <p:inputText id="motivo" value="#{diagnosticoController.selected.motivo}" 
+                                     title="#{bundle.CreateDiagnosticoTitle_motivo}" />
+                        <p:outputLabel value="#{bundle.CreateDiagnosticoLabel_analisisSolicitados}" for="analisisSolicitados" />
+                        <p:inputText id="analisisSolicitados" value="#{diagnosticoController.selected.analisisSolicitados}" 
+                                     title="#{bundle.CreateDiagnosticoTitle_analisisSolicitados}" />
+                        <p:outputLabel value="#{bundle.CreateDiagnosticoLabel_examenCli}" for="examenCli"  />
+                        <p:inputTextarea id="examenCli" value="#{diagnosticoController.selected.examenCli}" 
+                                         style="width: 100px; min-width: 400px;" 
+                                         title="#{bundle.CreateDiagnosticoTitle_examenCli}" />
+                        <p:outputLabel value="#{bundle.CreateDiagnosticoLabel_diagnostico}" for="diagnostico" />
+                        <p:inputTextarea id="diagnostico" value="#{diagnosticoController.selected.diagnostico}" 
+                                         style="width: 100px; min-width: 400px;" 
+                                         title="#{bundle.CreateDiagnosticoTitle_diagnostico}" />
+                        <p:outputLabel value="#{bundle.CreateDiagnosticoLabel_tratamiento}" for="tratamiento" />
+                        <p:inputTextarea id="tratamiento" value="#{diagnosticoController.selected.tratamiento}" 
+                                         style="width: 100px; min-width: 400px;" 
+                                         title="#{bundle.CreateDiagnosticoTitle_tratamiento}" />
+                    </h:panelGrid>
+                    <p:commandButton actionListener="#{diagnosticoController.create}" value="#{bundle.Save}" 
+                                     update="display,:DiagnosticoListForm:datalist,:growl,@form" 
+                                    oncomplete="if (args &amp;&amp; !args.validationFailed) PF('DiagnosticoCreateDialog').hide()" />
+                     <p:commandButton value="#{bundle.Cancel}" oncomplete="PF('DiagnosticoCreateDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>          
+        </p:dialog>
+
+    </ui:composition>
+</html>

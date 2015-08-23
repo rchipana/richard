@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HistoriaClinicaViewDlg" widgetVar="HistoriaClinicaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewHistoriaClinicaTitle}">
+            <h:form id="HistoriaClinicaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{historiaClinicaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_idHistoriaClinica}"/>
+                        <h:outputText value="#{historiaClinicaController.selected.idHistoriaClinica}" title="#{bundle.ViewHistoriaClinicaTitle_idHistoriaClinica}"/>
+                        <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_fechaReg}"/>
+                        <h:outputText value="#{historiaClinicaController.selected.fechaReg}" title="#{bundle.ViewHistoriaClinicaTitle_fechaReg}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_peso}"/>
+                        <h:outputText value="#{historiaClinicaController.selected.peso}" title="#{bundle.ViewHistoriaClinicaTitle_peso}"/>
+                        <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_talla}"/>
+                        <h:outputText value="#{historiaClinicaController.selected.talla}" title="#{bundle.ViewHistoriaClinicaTitle_talla}"/>
+                        <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_mucosas}"/>
+                        <h:outputText value="#{historiaClinicaController.selected.mucosas}" title="#{bundle.ViewHistoriaClinicaTitle_mucosas}"/>
+                        <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_anamnesis}"/>
+                        <h:outputText value="#{historiaClinicaController.selected.anamnesis}" title="#{bundle.ViewHistoriaClinicaTitle_anamnesis}"/>
+                        <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_otroconsultorio}"/>
+                        <h:outputText value="#{historiaClinicaController.selected.otroconsultorio}" title="#{bundle.ViewHistoriaClinicaTitle_otroconsultorio}"/>
+                        <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_tratamiento}"/>
+                        <h:outputText value="#{historiaClinicaController.selected.tratamiento}" title="#{bundle.ViewHistoriaClinicaTitle_tratamiento}"/>
+                        <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_idMascota}"/>
+                        <h:outputText value="#{historiaClinicaController.selected.idMascota}" title="#{bundle.ViewHistoriaClinicaTitle_idMascota}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="HistoriaClinicaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

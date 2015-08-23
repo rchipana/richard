@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditoriaCreateDlg" widgetVar="AuditoriaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAuditoriaTitle}">
+            <h:form id="AuditoriaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{auditoriaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_idAuditoria}" for="idAuditoria" />
+                        <p:inputText id="idAuditoria" value="#{auditoriaController.selected.idAuditoria}" title="#{bundle.CreateAuditoriaTitle_idAuditoria}" required="true" requiredMessage="#{bundle.CreateAuditoriaRequiredMessage_idAuditoria}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_fechaLogin}" for="fechaLogin" />
+                        <p:calendar id="fechaLogin" pattern="MM/dd/yyyy HH:mm:ss" value="#{auditoriaController.selected.fechaLogin}" title="#{bundle.EditAuditoriaTitle_fechaLogin}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_fechaLogout}" for="fechaLogout" />
+                        <p:calendar id="fechaLogout" pattern="MM/dd/yyyy HH:mm:ss" value="#{auditoriaController.selected.fechaLogout}" title="#{bundle.EditAuditoriaTitle_fechaLogout}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_user}" for="user" />
+                        <p:inputText id="user" value="#{auditoriaController.selected.user}" title="#{bundle.CreateAuditoriaTitle_user}" />
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_tiempo}" for="tiempo" />
+                        <p:inputText id="tiempo" value="#{auditoriaController.selected.tiempo}" title="#{bundle.CreateAuditoriaTitle_tiempo}" />
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_idSede}" for="idSede" />
+                        <p:selectOneMenu id="idSede" value="#{auditoriaController.selected.idSede}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_idSede}">
+                            <f:selectItems value="#{sedeController.itemsAvailableSelectOne}"
+                                           var="idSedeItem"
+                                           itemValue="#{idSedeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{auditoriaController.create}" value="#{bundle.Save}" update="display,:AuditoriaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuditoriaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AuditoriaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

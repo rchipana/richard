@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HistoriaClinicaHasVacunaCreateDlg" widgetVar="HistoriaClinicaHasVacunaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateHistoriaClinicaHasVacunaTitle}">
+            <h:form id="HistoriaClinicaHasVacunaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{historiaClinicaHasVacunaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateHistoriaClinicaHasVacunaLabel_idHistoriaClinicahasVacuna}" for="idHistoriaClinicahasVacuna" />
+                        <p:inputText id="idHistoriaClinicahasVacuna" value="#{historiaClinicaHasVacunaController.selected.idHistoriaClinicahasVacuna}" title="#{bundle.CreateHistoriaClinicaHasVacunaTitle_idHistoriaClinicahasVacuna}" required="true" requiredMessage="#{bundle.CreateHistoriaClinicaHasVacunaRequiredMessage_idHistoriaClinicahasVacuna}"/>
+                        <p:outputLabel value="#{bundle.CreateHistoriaClinicaHasVacunaLabel_idVacuna}" for="idVacuna" />
+                        <p:selectOneMenu id="idVacuna" value="#{historiaClinicaHasVacunaController.selected.idVacuna}" required="true" requiredMessage="#{bundle.EditHistoriaClinicaHasVacunaRequiredMessage_idVacuna}">
+                            <f:selectItems value="#{vacunaController.itemsAvailableSelectOne}"
+                                           var="idVacunaItem"
+                                           itemValue="#{idVacunaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateHistoriaClinicaHasVacunaLabel_idHistoriaClinica}" for="idHistoriaClinica" />
+                        <p:selectOneMenu id="idHistoriaClinica" value="#{historiaClinicaHasVacunaController.selected.idHistoriaClinica}" required="true" requiredMessage="#{bundle.EditHistoriaClinicaHasVacunaRequiredMessage_idHistoriaClinica}">
+                            <f:selectItems value="#{historiaClinicaController.itemsAvailableSelectOne}"
+                                           var="idHistoriaClinicaItem"
+                                           itemValue="#{idHistoriaClinicaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{historiaClinicaHasVacunaController.create}" value="#{bundle.Save}" update="display,:HistoriaClinicaHasVacunaListForm:datalist,:growl" oncomplete="handleSubmit(args,'HistoriaClinicaHasVacunaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="HistoriaClinicaHasVacunaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

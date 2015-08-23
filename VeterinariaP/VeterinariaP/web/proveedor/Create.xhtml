@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProveedorCreateDlg" widgetVar="ProveedorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateProveedorTitle}">
+            <h:form id="ProveedorCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proveedorController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateProveedorLabel_idProveedor}" for="idProveedor" />
+                        <p:inputText id="idProveedor" value="#{proveedorController.selected.idProveedor}" title="#{bundle.CreateProveedorTitle_idProveedor}" required="true" requiredMessage="#{bundle.CreateProveedorRequiredMessage_idProveedor}"/>
+                        <p:outputLabel value="#{bundle.CreateProveedorLabel_rucProv}" for="rucProv" />
+                        <p:inputText id="rucProv" value="#{proveedorController.selected.rucProv}" title="#{bundle.CreateProveedorTitle_rucProv}" />
+                        <p:outputLabel value="#{bundle.CreateProveedorLabel_nombreProv}" for="nombreProv" />
+                        <p:inputText id="nombreProv" value="#{proveedorController.selected.nombreProv}" title="#{bundle.CreateProveedorTitle_nombreProv}" />
+                        <p:outputLabel value="#{bundle.CreateProveedorLabel_telefProv}" for="telefProv" />
+                        <p:inputText id="telefProv" value="#{proveedorController.selected.telefProv}" title="#{bundle.CreateProveedorTitle_telefProv}" />
+                        <p:outputLabel value="#{bundle.CreateProveedorLabel_direccProv}" for="direccProv" />
+                        <p:inputText id="direccProv" value="#{proveedorController.selected.direccProv}" title="#{bundle.CreateProveedorTitle_direccProv}" />
+                        <p:outputLabel value="#{bundle.CreateProveedorLabel_correoProv}" for="correoProv" />
+                        <p:inputText id="correoProv" value="#{proveedorController.selected.correoProv}" title="#{bundle.CreateProveedorTitle_correoProv}" />
+                        <p:outputLabel value="#{bundle.CreateProveedorLabel_numCuenta}" for="numCuenta" />
+                        <p:inputText id="numCuenta" value="#{proveedorController.selected.numCuenta}" title="#{bundle.CreateProveedorTitle_numCuenta}" />
+                        <p:outputLabel value="#{bundle.CreateProveedorLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{proveedorController.selected.estado}" title="#{bundle.CreateProveedorTitle_estado}" />
+                        <p:outputLabel value="#{bundle.CreateProveedorLabel_distritoidDistrito}" for="distritoidDistrito" />
+                        <p:selectOneMenu id="distritoidDistrito" value="#{proveedorController.selected.distritoidDistrito}" required="true" requiredMessage="#{bundle.EditProveedorRequiredMessage_distritoidDistrito}">
+                            <f:selectItems value="#{distritoController.itemsAvailableSelectOne}"
+                                           var="distritoidDistritoItem"
+                                           itemValue="#{distritoidDistritoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proveedorController.create}" value="#{bundle.Save}" update="display,:ProveedorListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProveedorCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProveedorCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

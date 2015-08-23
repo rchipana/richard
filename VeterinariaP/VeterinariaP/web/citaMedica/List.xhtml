@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCitaMedicaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="CitaMedicaListForm">
+                <p:panel header="Medico">
+                   
+                        <p:outputLabel value="Medico" for="med" />
+                        <p:selectOneMenu id="med" value="#{citaMedicaController.empleado}" 
+                                         style="width: 400px">
+                            <f:selectItem itemValue="#{null}" itemLabel="-----"/>
+                            <f:selectItems value="#{citaMedicaController.list_Empleado}"
+                                           var="empleaddo" itemLabel="#{empleaddo.nombreCompleto}"
+                                           itemValue="#{empleaddo}"/>
+                            <p:ajax event="change" listener="#{citaMedicaController.renderCalendar}" 
+                                    update=":CitaMedicaCreateCalendarForm,:CitaMedicaListForm"/>
+                        </p:selectOneMenu>                                       
+                   
+                     <p:commandButton value="Buscar Cita por Asociado" icon="ui-icon-search" 
+                                     update=":CitaMedicalistgForm" style="float: right"
+                                     oncomplete="PF('CitaMedicalistgDialog').show()"  /> 
+                </p:panel>
+
+                <p:panel header="#{bundle.ListCitaMedicaTitle}">
+                   
+                    <p:dataTable id="datalist" value="#{citaMedicaController.items}" var="item"
+
+                                 selectionMode="single" selection="#{citaMedicaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idCitamedica}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton  "/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton "/>
+
+                        <p:column headerText="Medico">
+                            <h:outputText value="#{item.idEmpleado.nombreCompleto}"/>
+                        </p:column>
+                        <p:column headerText="Asociado">
+                            <h:outputText value="#{item.idAsociado.nombreCompletoS}"/>
+                        </p:column>
+                        <p:column headerText="Mascota" style="width:100px">
+                            <h:outputText value="#{item.idMascota.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCitaMedicaTitle_fechaInicio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaInicio}">
+                                <f:convertDateTime pattern="dd/MM/yyyy "  timeZone="GMT-5" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Hora Cita"/>
+                            </f:facet>
+                            <h:outputText value="#{item.horaIni}">
+                                <f:convertDateTime pattern="hh:mm a"  timeZone="GMT-5" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCitaMedicaTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estadoCit == 1 ? 'Activa' : 'Anulada'}"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"  
+                                             value="#{bundle.Create}"
+                                             actionListener="#{citaMedicaController.prepareCreate}"
+                                             update=":CitaMedicaCreateForm" 
+                                             oncomplete="PF('CitaMedicaCreateDialog').show()">                             
+                            </p:commandButton>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" 
+                                             value="#{bundle.View}" update=":CitaMedicaViewForm" 
+                                             oncomplete="PF('CitaMedicaViewDialog').show()" 
+                                             disabled="#{empty citaMedicaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" 
+                                             actionListener="#{citaMedicaController.recupCita(citaMedicaController.selected)}"
+                                             value="#{bundle.Edit}" update=":CitaMedicaEditForm" 
+                                             oncomplete="PF('CitaMedicaEditDialog').show()"                                         
+                                             disabled="#{empty citaMedicaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  
+                                             value="#{bundle.Delete}" actionListener="#{citaMedicaController.destroy}" 
+                                             update="datalist,:CitaMedicaCreateCalendarForm:chs"
+                                             disabled="#{empty citaMedicaController.selected}">
+
+                                <p:confirm header="#{bundle.ConfirmarTitulo}" message="#{bundle.ConfirmarAnular}" icon="ui-icon-alert" />  
+                            </p:commandButton>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+            <ui:include src="List_2.xhtml"/>
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+            <ui:include src="CitaCalendario.xhtml"/>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

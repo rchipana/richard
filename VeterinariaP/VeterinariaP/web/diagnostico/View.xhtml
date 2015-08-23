@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DiagnosticoViewDlg" widgetVar="DiagnosticoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDiagnosticoTitle}">
+            <h:form id="DiagnosticoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{diagnosticoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_idDiagnostico}"/>
+                        <h:outputText value="#{diagnosticoController.selected.idDiagnostico}" title="#{bundle.ViewDiagnosticoTitle_idDiagnostico}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_fecha}"/>
+                        <h:outputText value="#{diagnosticoController.selected.fecha}" title="#{bundle.ViewDiagnosticoTitle_fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_peso}"/>
+                        <h:outputText value="#{diagnosticoController.selected.peso}" title="#{bundle.ViewDiagnosticoTitle_peso}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_talla}"/>
+                        <h:outputText value="#{diagnosticoController.selected.talla}" title="#{bundle.ViewDiagnosticoTitle_talla}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_atendidoPor}"/>
+                        <h:outputText value="#{diagnosticoController.selected.atendidoPor}" title="#{bundle.ViewDiagnosticoTitle_atendidoPor}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_mucosas}"/>
+                        <h:outputText value="#{diagnosticoController.selected.mucosas}" title="#{bundle.ViewDiagnosticoTitle_mucosas}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_motivo}"/>
+                        <h:outputText value="#{diagnosticoController.selected.motivo}" title="#{bundle.ViewDiagnosticoTitle_motivo}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_examenCli}"/>
+                        <h:outputText value="#{diagnosticoController.selected.examenCli}" title="#{bundle.ViewDiagnosticoTitle_examenCli}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_diagnostico}"/>
+                        <h:outputText value="#{diagnosticoController.selected.diagnostico}" title="#{bundle.ViewDiagnosticoTitle_diagnostico}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_analisisSolicitados}"/>
+                        <h:outputText value="#{diagnosticoController.selected.analisisSolicitados}" title="#{bundle.ViewDiagnosticoTitle_analisisSolicitados}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_tratamiento}"/>
+                        <h:outputText value="#{diagnosticoController.selected.tratamiento}" title="#{bundle.ViewDiagnosticoTitle_tratamiento}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_proximaCita}"/>
+                        <h:outputText value="#{diagnosticoController.selected.proximaCita}" title="#{bundle.ViewDiagnosticoTitle_proximaCita}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_idCitamedica}"/>
+                        <h:outputText value="#{diagnosticoController.selected.idCitamedica}" title="#{bundle.ViewDiagnosticoTitle_idCitamedica}"/>
+                        <h:outputText value="#{bundle.ViewDiagnosticoLabel_idHistoriaClinica}"/>
+                        <h:outputText value="#{diagnosticoController.selected.idHistoriaClinica}" title="#{bundle.ViewDiagnosticoTitle_idHistoriaClinica}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DiagnosticoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

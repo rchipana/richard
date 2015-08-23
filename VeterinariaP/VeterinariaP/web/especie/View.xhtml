@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EspecieViewDlg" widgetVar="EspecieViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEspecieTitle}">
+            <h:form id="EspecieViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{especieController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEspecieLabel_idEspecie}"/>
+                        <h:outputText value="#{especieController.selected.idEspecie}" title="#{bundle.ViewEspecieTitle_idEspecie}"/>
+                        <h:outputText value="#{bundle.ViewEspecieLabel_descripcion}"/>
+                        <h:outputText value="#{especieController.selected.descripcion}" title="#{bundle.ViewEspecieTitle_descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EspecieViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

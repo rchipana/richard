@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">    
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Sistema Veterinaria - Login</title>
+            </f:facet>
+            <h:outputStylesheet name="css/estilos.css"/>
+
+        </h:head>
+
+        <h:body  style="background-image: url(./resources/imagenes/portada.jpg);background-color: rgb(0,0,255); opacity: 0.5; ">
+          
+            <center style="margin-top: 25%">
+                <h:form acceptcharset="UTF-8">
+
+                    <p:panel header="Ingreso" style="width:400px">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel for="username" value="Usuario:" />
+                            <p:inputText  value="#{empleadoController.dni}" id="username"
+                                          required="false" label="username" autocomplete="false" />
+                            <p:outputLabel for="password" value="Clave:" />
+                            <p:password value="#{empleadoController.clave}" id="password" required="false"
+                                        label="password" autocomplete="false"/>
+                            <f:facet name="footer">
+                                <p:commandButton ajax="false" id="loginButton" value="Ingresar" 
+                                                 action="#{empleadoController.login()}" />
+                            </f:facet>
+                        </h:panelGrid>
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" />
+                        </h:panelGroup>
+                    </p:panel>
+                </h:form>
+            </center>
+        </h:body>
+    </f:view>
+</html>

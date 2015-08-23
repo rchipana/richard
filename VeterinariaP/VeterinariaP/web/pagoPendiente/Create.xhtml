@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PagoPendienteCreateDlg" widgetVar="PagoPendienteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePagoPendienteTitle}">
+            <h:form id="PagoPendienteCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pagoPendienteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePagoPendienteLabel_idPagopendiente}" for="idPagopendiente" />
+                        <p:inputText id="idPagopendiente" value="#{pagoPendienteController.selected.idPagopendiente}" title="#{bundle.CreatePagoPendienteTitle_idPagopendiente}" required="true" requiredMessage="#{bundle.CreatePagoPendienteRequiredMessage_idPagopendiente}"/>
+                        <p:outputLabel value="#{bundle.CreatePagoPendienteLabel_fechaPago}" for="fechaPago" />
+                        <p:calendar id="fechaPago" pattern="MM/dd/yyyy HH:mm:ss" value="#{pagoPendienteController.selected.fechaPago}" title="#{bundle.EditPagoPendienteTitle_fechaPago}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePagoPendienteLabel_fechaNueva}" for="fechaNueva" />
+                        <p:calendar id="fechaNueva" pattern="MM/dd/yyyy HH:mm:ss" value="#{pagoPendienteController.selected.fechaNueva}" title="#{bundle.EditPagoPendienteTitle_fechaNueva}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePagoPendienteLabel_montoTotalPagar}" for="montoTotalPagar" />
+                        <p:inputText id="montoTotalPagar" value="#{pagoPendienteController.selected.montoTotalPagar}" title="#{bundle.CreatePagoPendienteTitle_montoTotalPagar}" />
+                        <p:outputLabel value="#{bundle.CreatePagoPendienteLabel_idComprobantepago}" for="idComprobantepago" />
+                        <p:selectOneMenu id="idComprobantepago" value="#{pagoPendienteController.selected.idComprobantepago}" required="true" requiredMessage="#{bundle.EditPagoPendienteRequiredMessage_idComprobantepago}">
+                            <f:selectItems value="#{comprobantePagoController.itemsAvailableSelectOne}"
+                                           var="idComprobantepagoItem"
+                                           itemValue="#{idComprobantepagoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pagoPendienteController.create}" value="#{bundle.Save}" update="display,:PagoPendienteListForm:datalist,:growl" oncomplete="handleSubmit(args,'PagoPendienteCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PagoPendienteCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

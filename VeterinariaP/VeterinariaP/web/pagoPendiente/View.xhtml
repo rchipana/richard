@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PagoPendienteViewDlg" widgetVar="PagoPendienteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPagoPendienteTitle}">
+            <h:form id="PagoPendienteViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pagoPendienteController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPagoPendienteLabel_idPagopendiente}"/>
+                        <h:outputText value="#{pagoPendienteController.selected.idPagopendiente}" title="#{bundle.ViewPagoPendienteTitle_idPagopendiente}"/>
+                        <h:outputText value="#{bundle.ViewPagoPendienteLabel_fechaPago}"/>
+                        <h:outputText value="#{pagoPendienteController.selected.fechaPago}" title="#{bundle.ViewPagoPendienteTitle_fechaPago}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPagoPendienteLabel_fechaNueva}"/>
+                        <h:outputText value="#{pagoPendienteController.selected.fechaNueva}" title="#{bundle.ViewPagoPendienteTitle_fechaNueva}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPagoPendienteLabel_montoTotalPagar}"/>
+                        <h:outputText value="#{pagoPendienteController.selected.montoTotalPagar}" title="#{bundle.ViewPagoPendienteTitle_montoTotalPagar}"/>
+                        <h:outputText value="#{bundle.ViewPagoPendienteLabel_idComprobantepago}"/>
+                        <h:outputText value="#{pagoPendienteController.selected.idComprobantepago}" title="#{bundle.ViewPagoPendienteTitle_idComprobantepago}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PagoPendienteViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

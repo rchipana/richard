@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DisponibilidadSViewDlg" widgetVar="DisponibilidadSViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDisponibilidadSTitle}">
+            <h:form id="DisponibilidadSViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{disponibilidadSController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDisponibilidadSLabel_idDisponibilidads}"/>
+                        <h:outputText value="#{disponibilidadSController.selected.idDisponibilidads}" title="#{bundle.ViewDisponibilidadSTitle_idDisponibilidads}"/>
+                        <h:outputText value="#{bundle.ViewDisponibilidadSLabel_fechaDispS}"/>
+                        <h:outputText value="#{disponibilidadSController.selected.fechaDispS}" title="#{bundle.ViewDisponibilidadSTitle_fechaDispS}"/>
+                        <h:outputText value="#{bundle.ViewDisponibilidadSLabel_horaDispS}"/>
+                        <h:outputText value="#{disponibilidadSController.selected.horaDispS}" title="#{bundle.ViewDisponibilidadSTitle_horaDispS}"/>
+                        <h:outputText value="#{bundle.ViewDisponibilidadSLabel_idProducto}"/>
+                        <h:outputText value="#{disponibilidadSController.selected.idProducto}" title="#{bundle.ViewDisponibilidadSTitle_idProducto}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DisponibilidadSViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

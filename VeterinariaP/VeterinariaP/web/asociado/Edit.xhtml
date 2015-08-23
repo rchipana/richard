@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsociadoEditDlg" widgetVar="AsociadoEditDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="#{bundle.EditAsociadoTitle}">
+            <h:form id="AsociadoEditForm">
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2" rendered="#{asociadoController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_nombres}" for="nombres" />
+                       <p:inputText id="nombres" value="#{asociadoController.selected.nombres}" 
+                                     required="true"   onblur="this.value = this.value.toUpperCase();" 
+                                     title="#{bundle.CreateAsociadoTitle_nombres}" >
+                            <pe:keyFilter regEx="/^[A-Za-z\_\-\.\s\xF1\xD1]+$/" preventPaste="false" />
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_apePat}" for="apePat" />
+                        <p:inputText id="apePat" value="#{asociadoController.selected.apePat}" 
+                                     required="true"   onblur="this.value = this.value.toUpperCase();" 
+                                     title="#{bundle.CreateAsociadoTitle_apePat}" >
+                            <pe:keyFilter regEx="/^[A-Za-z\_\-\.\s\xF1\xD1]+$/" preventPaste="false" />
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_apeMat}" for="apeMat" />
+                        <p:inputText id="apeMat" value="#{asociadoController.selected.apeMat}" 
+                                     required="true"   onblur="this.value = this.value.toUpperCase();" 
+                                     title="#{bundle.CreateAsociadoTitle_apeMat}" >
+                            <pe:keyFilter regEx="/^[A-Za-z\_\-\.\s\xF1\xD1]+$/" preventPaste="false" />
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_fechaNac}" for="fechaNac" />
+                        <p:calendar id="fechaNac" pattern="dd/MM/yyyy" value="#{asociadoController.selected.fechaNac}" 
+                                    title="#{bundle.EditAsociadoTitle_fechaNac}"  required="true"
+                                    navigator="true" locale="es"                                 
+                                    showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_telef}" for="telef" />
+                         <p:inputText id="telef" value="#{asociadoController.selected.telef}" 
+                                     title="#{bundle.CreateAsociadoTitle_telef}" >
+                            <pe:keyFilter mask="pint" preventPaste="true" />
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_celular}" for="celular" />
+                        <p:inputText id="celular" value="#{asociadoController.selected.celular}" required="true"
+                                     title="#{bundle.CreateAsociadoTitle_celular}" >
+                            <pe:keyFilter mask="pint" preventPaste="true" />
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_direcc}" for="direcc" />
+                        <p:inputText id="direcc" value="#{asociadoController.selected.direcc}"
+                                     required="true"   onblur="this.value = this.value.toUpperCase();" 
+                                     title="#{bundle.CreateAsociadoTitle_direcc}" />
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{asociadoController.selected.email}" 
+                                     title="#{bundle.EditAsociadoTitle_email}" />
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_ruc}" for="ruc" />
+                        <p:inputText id="ruc" value="#{asociadoController.selected.ruc}" maxlength="11"
+                                     title="#{bundle.CreateAsociadoTitle_ruc}" >
+                            <pe:keyFilter mask="pint" preventPaste="true" />
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_dni}" for="dni" />
+                      <p:inputText id="dni" value="#{asociadoController.selected.dni}" 
+                                     maxlength="8" required="true"
+                                     title="#{bundle.CreateAsociadoTitle_dni}" >
+                            <pe:keyFilter mask="pint" preventPaste="true" />
+                        </p:inputText>  
+                        <p:outputLabel value="#{bundle.CreateAsociadoLabel_sexo}" for="sexo" />
+                        <p:selectOneMenu id="sexo" value="#{asociadoController.selected.sexo}" required="true"
+                                         >
+                            <f:selectItem itemLabel="-----" itemValue="#{null}"/>
+                            <f:selectItem itemLabel="MASCULINO" itemValue="MASCULINO"/>
+                            <f:selectItem itemLabel="FEMENINO" itemValue="FEMENINO"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAsociadoLabel_idDistrito}" for="idDistrito" />
+                        <p:selectOneMenu id="idDistrito" value="#{asociadoController.selected.idDistrito}" 
+                                         required="true" requiredMessage="#{bundle.EditAsociadoRequiredMessage_idDistrito}">
+                            <f:selectItems value="#{asociadoController.list_Distrito}"
+                                           var="idDistritoItem" itemLabel="#{idDistritoItem.descripcion}"
+                                           itemValue="#{idDistritoItem}"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <p:commandButton actionListener="#{asociadoController.update}" value="#{bundle.Save}"  
+                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('AsociadoEditDialog').hide()" 
+                                     update="display,:AsociadoListForm:datalist,:growl" />
+                    <p:commandButton value="#{bundle.Cancel}"   oncomplete="PF('AsociadoEditDialog').hide()"/>
+
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AccesoEditDlg" widgetVar="AccesoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAccesoTitle}">
+            <h:form id="AccesoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{accesoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAccesoLabel_idoacceso}" for="idoacceso" />
+                        <p:inputText id="idoacceso" value="#{accesoController.selected.idoacceso}" title="#{bundle.EditAccesoTitle_idoacceso}" required="true" requiredMessage="#{bundle.EditAccesoRequiredMessage_idoacceso}"/>
+                        <p:outputLabel value="#{bundle.EditAccesoLabel_idTipoEmpleado}" for="idTipoEmpleado" />
+                        <p:selectOneMenu id="idTipoEmpleado" value="#{accesoController.selected.idTipoEmpleado}" required="true" requiredMessage="#{bundle.EditAccesoRequiredMessage_idTipoEmpleado}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoEmpleadoController.itemsAvailableSelectOne}"
+                                           var="idTipoEmpleadoItem"
+                                           itemValue="#{idTipoEmpleadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAccesoLabel_idopcion}" for="idopcion" />
+                        <p:selectOneMenu id="idopcion" value="#{accesoController.selected.idopcion}" required="true" requiredMessage="#{bundle.EditAccesoRequiredMessage_idopcion}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{opcionController.itemsAvailableSelectOne}"
+                                           var="idopcionItem"
+                                           itemValue="#{idopcionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{accesoController.update}" value="#{bundle.Save}" update="display,:AccesoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AccesoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AccesoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

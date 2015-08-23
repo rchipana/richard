@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DiagnosticoEditDlg" widgetVar="DiagnosticoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDiagnosticoTitle}">
+            <h:form id="DiagnosticoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{diagnosticoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_idDiagnostico}" for="idDiagnostico" />
+                        <p:inputText id="idDiagnostico" value="#{diagnosticoController.selected.idDiagnostico}" title="#{bundle.EditDiagnosticoTitle_idDiagnostico}" required="true" requiredMessage="#{bundle.EditDiagnosticoRequiredMessage_idDiagnostico}"/>
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{diagnosticoController.selected.fecha}" title="#{bundle.EditDiagnosticoTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_peso}" for="peso" />
+                        <p:inputText id="peso" value="#{diagnosticoController.selected.peso}" title="#{bundle.EditDiagnosticoTitle_peso}" />
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_talla}" for="talla" />
+                        <p:inputText id="talla" value="#{diagnosticoController.selected.talla}" title="#{bundle.EditDiagnosticoTitle_talla}" />
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_atendidoPor}" for="atendidoPor" />
+                        <p:inputText id="atendidoPor" value="#{diagnosticoController.selected.atendidoPor}" title="#{bundle.EditDiagnosticoTitle_atendidoPor}" />
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_mucosas}" for="mucosas" />
+                        <p:inputText id="mucosas" value="#{diagnosticoController.selected.mucosas}" title="#{bundle.EditDiagnosticoTitle_mucosas}" />
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_motivo}" for="motivo" />
+                        <p:inputText id="motivo" value="#{diagnosticoController.selected.motivo}" title="#{bundle.EditDiagnosticoTitle_motivo}" />
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_examenCli}" for="examenCli" />
+                        <p:inputText id="examenCli" value="#{diagnosticoController.selected.examenCli}" title="#{bundle.EditDiagnosticoTitle_examenCli}" />
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_diagnostico}" for="diagnostico" />
+                        <p:inputText id="diagnostico" value="#{diagnosticoController.selected.diagnostico}" title="#{bundle.EditDiagnosticoTitle_diagnostico}" />
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_analisisSolicitados}" for="analisisSolicitados" />
+                        <p:inputText id="analisisSolicitados" value="#{diagnosticoController.selected.analisisSolicitados}" title="#{bundle.EditDiagnosticoTitle_analisisSolicitados}" />
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_tratamiento}" for="tratamiento" />
+                        <p:inputText id="tratamiento" value="#{diagnosticoController.selected.tratamiento}" title="#{bundle.EditDiagnosticoTitle_tratamiento}" />
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_proximaCita}" for="proximaCita" />
+                        <p:inputText id="proximaCita" value="#{diagnosticoController.selected.proximaCita}" title="#{bundle.EditDiagnosticoTitle_proximaCita}" />
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_idCitamedica}" for="idCitamedica" />
+                        <p:selectOneMenu id="idCitamedica" value="#{diagnosticoController.selected.idCitamedica}" required="true" requiredMessage="#{bundle.EditDiagnosticoRequiredMessage_idCitamedica}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{citaMedicaController.itemsAvailableSelectOne}"
+                                           var="idCitamedicaItem"
+                                           itemValue="#{idCitamedicaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDiagnosticoLabel_idHistoriaClinica}" for="idHistoriaClinica" />
+                        <p:selectOneMenu id="idHistoriaClinica" value="#{diagnosticoController.selected.idHistoriaClinica}" required="true" requiredMessage="#{bundle.EditDiagnosticoRequiredMessage_idHistoriaClinica}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{historiaClinicaController.itemsAvailableSelectOne}"
+                                           var="idHistoriaClinicaItem"
+                                           itemValue="#{idHistoriaClinicaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{diagnosticoController.update}" value="#{bundle.Save}" update="display,:DiagnosticoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DiagnosticoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DiagnosticoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

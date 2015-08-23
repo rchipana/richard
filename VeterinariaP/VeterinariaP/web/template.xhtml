@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <f:view contentType="text/html" >
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Sistema - Veterinaria</title>
+                <h:outputStylesheet name="css/jsfcrud.css"/>
+                <h:outputScript name="js/general.js"/>
+            </f:facet>
+            <h:outputStylesheet name="css/estilos.css"/>
+            <f:event type="preRenderView" listener="#{plantillaController.validarSesion()}"/> 
+        </h:head>
+
+
+       <h:body  >
+            <p:growl id="growl" life="3000" />
+            <p:layout fullPage="true">
+                <p:layoutUnit position="west" size="220" header="Opciones"  resizable="true" collapsible="true">
+                    <h:form >
+                        <h:panelGrid columns="1"  >
+                            <p:outputLabel value='Bienvenido: #{empleadoController.nombreUsuario} Usuario' />
+                            <p:commandButton icon="ui-icon-key" action="#{empleadoController.hacerLogout()}" value="Cerrar Sesion"/>                                                                            
+                        </h:panelGrid>
+                        <p:panelMenu   >
+                            <p:submenu label="ASOCIADO">
+                                <p:menuitem value="ASOCIADO" action="#{#}" outcome="/asociado/List"  icon="ui-icon-disk"  />                                                                 
+
+                            </p:submenu>
+                            <p:submenu label="EMPLEADO">
+                                <p:menuitem value="EMLEADO" action="#{#}" outcome="/empleado/List" icon="ui-icon-disk"  />                                                                 
+
+                            </p:submenu>
+                            <p:submenu label="MASCOTA">
+                                <p:menuitem value="MASCOTA" action="#{#}" outcome="/mascota/List"  icon="ui-icon-disk" />                  
+
+                            </p:submenu>
+                            <p:submenu label="RESERVAR CITA">
+
+                                <p:menuitem value="CITA" action="#{#}" outcome="/citaMedica/List" icon="ui-icon-disk" />                                    
+                            </p:submenu>
+                            <p:submenu label="ATENCION MEDICA"> 
+                                <p:menuitem value="HISTORIA CLINICA"  outcome="/historiaClinica/List" icon="ui-icon-disk" /> 
+                                <p:menuitem value="DIAGNOSTICO" outcome="/diagnostico/List" icon="ui-icon-disk" /> 
+                               
+                            </p:submenu>
+                            <p:submenu label="MANTENIMIENTO" rendered="#{empleadoController.permi}" >   
+                                <p:menuitem value="HORARIO" action="#{#}" outcome="/horario/List"  icon="ui-icon-disk" />                  
+                                <p:menuitem value="TIPO EMPLEADO" outcome="/tipoEmpleado/List" icon="ui-icon-disk" /> 
+                                <p:menuitem value="IGV" outcome="/igv/List" icon="ui-icon-disk" />
+                                <p:menuitem value="TIPO CAMBIO" outcome="/tipoCambio/List" icon="ui-icon-disk" />
+                                <p:menuitem value="PRODUCTO" outcome="/producto/List" icon="ui-icon-disk" />
+                                <p:menuitem value="CATEGORIA" outcome="/categoria/List" icon="ui-icon-disk" />
+
+                                <p:menuitem value="ESPECIE" outcome="/pelaje/List" icon="ui-icon-disk" />
+
+                            </p:submenu>
+                        </p:panelMenu>
+                    </h:form>    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center"  >
+                    <span >
+                        <ui:insert  name="title" >Default Title</ui:insert>
+                    </span>
+                    <br/>
+                    <br/>
+                    <ui:insert name="body"  >Default Body</ui:insert>
+                </p:layoutUnit>
+
+            </p:layout>
+            <h:form > 
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                </p:confirmDialog>
+                <p:ajaxStatus onstart="PF('loadingDialog').show()" onsuccess="PF('loadingDialog').hide()"/>
+                <p:dialog id="loadingDialog" style="background-color: transparent; border: none; box-shadow: none;"
+                          widgetVar="loadingDialog"
+                          showHeader="false"
+                          resizable="false" modal="true" 
+                          closable="false"
+                          draggable="false">
+                    <p:graphicImage name="icons/ajax-loader.gif"/>
+                </p:dialog>
+            </h:form>
+        </h:body>
+    </f:view>
+
+
+</html>

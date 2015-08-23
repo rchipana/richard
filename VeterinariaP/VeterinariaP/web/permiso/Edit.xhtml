@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PermisoEditDlg" widgetVar="PermisoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPermisoTitle}">
+            <h:form id="PermisoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{permisoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPermisoLabel_idpermiso}" for="idpermiso" />
+                        <p:inputText id="idpermiso" value="#{permisoController.selected.idpermiso}" title="#{bundle.EditPermisoTitle_idpermiso}" required="true" requiredMessage="#{bundle.EditPermisoRequiredMessage_idpermiso}"/>
+                        <p:outputLabel value="#{bundle.EditPermisoLabel_idEmpleado}" for="idEmpleado" />
+                        <p:selectOneMenu id="idEmpleado" value="#{permisoController.selected.idEmpleado}" required="true" requiredMessage="#{bundle.EditPermisoRequiredMessage_idEmpleado}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{empleadoController.itemsAvailableSelectOne}"
+                                           var="idEmpleadoItem"
+                                           itemValue="#{idEmpleadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPermisoLabel_idTipoEmpleado}" for="idTipoEmpleado" />
+                        <p:selectOneMenu id="idTipoEmpleado" value="#{permisoController.selected.idTipoEmpleado}" required="true" requiredMessage="#{bundle.EditPermisoRequiredMessage_idTipoEmpleado}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoEmpleadoController.itemsAvailableSelectOne}"
+                                           var="idTipoEmpleadoItem"
+                                           itemValue="#{idTipoEmpleadoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{permisoController.update}" value="#{bundle.Save}" update="display,:PermisoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PermisoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PermisoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

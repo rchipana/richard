@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition >
+
+
+        <p:dialog id="CitaMedicalistg" widgetVar="CitaMedicalistgDialog" modal="true" resizable="false" width="85%%"
+                  appendTo="@(body)" >
+
+            <h:form id="CitaMedicalistgForm">
+                <h:panelGroup id="display">
+                    <p:panel header="Asociado">
+                        <h:panelGrid columns="2">                     
+                            <h:panelGroup id="pa">
+                                <p:inputText onblur="this.value = this.value.toUpperCase();"  value="#{citaMedicaController.filtro}" size="40" />
+                                <p:commandButton value="#{bundle.Buscar}" icon="ui-icon-search" 
+                                                 update="datalist,pa" 
+                                                 action="#{citaMedicaController.lisAsocPot}" />  
+                            </h:panelGroup>
+
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:panel header="#{bundle.ListCitaMedicaTitle}">
+                        <p:dataTable id="datalist" value="#{citaMedicaController.items2}" var="item"
+
+                                     selectionMode="single" selection="#{citaMedicaController.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.idCitamedica}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     >
+                            <p:column headerText="Medico">
+                                <h:outputText value="#{item.idEmpleado.nombreCompleto}"/>
+                            </p:column>
+                            <p:column headerText="Asociado">
+                                <h:outputText value="#{item.idAsociado.nombreCompletoS}"/>
+                            </p:column>
+                            <p:column headerText="Mascota" style="width:100px">
+                                <h:outputText value="#{item.idMascota.nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListCitaMedicaTitle_fechaInicio}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaInicio}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy "  timeZone="GMT-5" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Hora Cita"/>
+                                </f:facet>
+                                <h:outputText value="#{item.horaIni}">
+                                    <f:convertDateTime pattern="hh:mm a"  timeZone="GMT-5" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListCitaMedicaTitle_descripcion}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.descripcion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Estado"/>
+                                </f:facet>
+                                <h:outputText value="#{item.estadoCit == 1 ? 'Activa' : 'Anulada'}"/>
+                            </p:column>
+
+
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGroup>
+            </h:form>
+
+
+
+
+        </p:dialog>
+
+
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DisponibilidadMViewDlg" widgetVar="DisponibilidadMViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDisponibilidadMTitle}">
+            <h:form id="DisponibilidadMViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{disponibilidadMController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDisponibilidadMLabel_idDisponibilidadm}"/>
+                        <h:outputText value="#{disponibilidadMController.selected.idDisponibilidadm}" title="#{bundle.ViewDisponibilidadMTitle_idDisponibilidadm}"/>
+                        <h:outputText value="#{bundle.ViewDisponibilidadMLabel_fechaDispM}"/>
+                        <h:outputText value="#{disponibilidadMController.selected.fechaDispM}" title="#{bundle.ViewDisponibilidadMTitle_fechaDispM}"/>
+                        <h:outputText value="#{bundle.ViewDisponibilidadMLabel_horaDispM}"/>
+                        <h:outputText value="#{disponibilidadMController.selected.horaDispM}" title="#{bundle.ViewDisponibilidadMTitle_horaDispM}"/>
+                        <h:outputText value="#{bundle.ViewDisponibilidadMLabel_estado}"/>
+                        <h:outputText value="#{disponibilidadMController.selected.estado}" title="#{bundle.ViewDisponibilidadMTitle_estado}"/>
+                        <h:outputText value="#{bundle.ViewDisponibilidadMLabel_idSede}"/>
+                        <h:outputText value="#{disponibilidadMController.selected.idSede}" title="#{bundle.ViewDisponibilidadMTitle_idSede}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DisponibilidadMViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MascotaViewDlg" widgetVar="MascotaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMascotaTitle}">
+            <h:form id="MascotaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mascotaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMascotaLabel_idMascota}"/>
+                        <h:outputText value="#{mascotaController.selected.idMascota}" title="#{bundle.ViewMascotaTitle_idMascota}"/>
+                        <h:outputText value="#{bundle.ViewMascotaLabel_nombre}"/>
+                        <h:outputText value="#{mascotaController.selected.nombre}" title="#{bundle.ViewMascotaTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewMascotaLabel_ruta}"/>
+                        <h:outputText value="#{mascotaController.selected.ruta}" title="#{bundle.ViewMascotaTitle_ruta}"/>
+                        <h:outputText value="#{bundle.ViewMascotaLabel_fechaNac}"/>
+                        <h:outputText value="#{mascotaController.selected.fechaNac}" title="#{bundle.ViewMascotaTitle_fechaNac}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMascotaLabel_fechaIng}"/>
+                        <h:outputText value="#{mascotaController.selected.fechaIng}" title="#{bundle.ViewMascotaTitle_fechaIng}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMascotaLabel_sexo}"/>
+                        <h:outputText value="#{mascotaController.selected.sexo}" title="#{bundle.ViewMascotaTitle_sexo}"/>
+                        <h:outputText value="#{bundle.ViewMascotaLabel_castrado}"/>
+                        <h:outputText value="#{mascotaController.selected.castrado}" title="#{bundle.ViewMascotaTitle_castrado}"/>
+                        <h:outputText value="#{bundle.ViewMascotaLabel_deceso}"/>
+                        <h:outputText value="#{mascotaController.selected.deceso}" title="#{bundle.ViewMascotaTitle_deceso}"/>
+                        <h:outputText value="#{bundle.ViewMascotaLabel_idPelaje}"/>
+                        <h:outputText value="#{mascotaController.selected.idPelaje}" title="#{bundle.ViewMascotaTitle_idPelaje}"/>
+                        <h:outputText value="#{bundle.ViewMascotaLabel_idRaza}"/>
+                        <h:outputText value="#{mascotaController.selected.idRaza}" title="#{bundle.ViewMascotaTitle_idRaza}"/>
+                        <h:outputText value="#{bundle.ViewMascotaLabel_idAsociado}"/>
+                        <h:outputText value="#{mascotaController.selected.idAsociado}" title="#{bundle.ViewMascotaTitle_idAsociado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" oncomplete="PF('MascotaViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

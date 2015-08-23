@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DetallePagoViewDlg" widgetVar="DetallePagoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDetallePagoTitle}">
+            <h:form id="DetallePagoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{detallePagoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDetallePagoLabel_idDetallePago}"/>
+                        <h:outputText value="#{detallePagoController.selected.idDetallePago}" title="#{bundle.ViewDetallePagoTitle_idDetallePago}"/>
+                        <h:outputText value="#{bundle.ViewDetallePagoLabel_tipoPago}"/>
+                        <h:outputText value="#{detallePagoController.selected.tipoPago}" title="#{bundle.ViewDetallePagoTitle_tipoPago}"/>
+                        <h:outputText value="#{bundle.ViewDetallePagoLabel_numeroDocl}"/>
+                        <h:outputText value="#{detallePagoController.selected.numeroDocl}" title="#{bundle.ViewDetallePagoTitle_numeroDocl}"/>
+                        <h:outputText value="#{bundle.ViewDetallePagoLabel_fechaPago}"/>
+                        <h:outputText value="#{detallePagoController.selected.fechaPago}" title="#{bundle.ViewDetallePagoTitle_fechaPago}"/>
+                        <h:outputText value="#{bundle.ViewDetallePagoLabel_montoPagado}"/>
+                        <h:outputText value="#{detallePagoController.selected.montoPagado}" title="#{bundle.ViewDetallePagoTitle_montoPagado}"/>
+                        <h:outputText value="#{bundle.ViewDetallePagoLabel_detallePagocol}"/>
+                        <h:outputText value="#{detallePagoController.selected.detallePagocol}" title="#{bundle.ViewDetallePagoTitle_detallePagocol}"/>
+                        <h:outputText value="#{bundle.ViewDetallePagoLabel_idFacturaprov}"/>
+                        <h:outputText value="#{detallePagoController.selected.idFacturaprov}" title="#{bundle.ViewDetallePagoTitle_idFacturaprov}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DetallePagoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

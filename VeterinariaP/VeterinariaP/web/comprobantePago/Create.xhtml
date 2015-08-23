@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ComprobantePagoCreateDlg" widgetVar="ComprobantePagoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateComprobantePagoTitle}">
+            <h:form id="ComprobantePagoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{comprobantePagoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateComprobantePagoLabel_idComprobantepago}" for="idComprobantepago" />
+                        <p:inputText id="idComprobantepago" value="#{comprobantePagoController.selected.idComprobantepago}" title="#{bundle.CreateComprobantePagoTitle_idComprobantepago}" required="true" requiredMessage="#{bundle.CreateComprobantePagoRequiredMessage_idComprobantepago}"/>
+                        <p:outputLabel value="#{bundle.CreateComprobantePagoLabel_fechaComp}" for="fechaComp" />
+                        <p:calendar id="fechaComp" pattern="MM/dd/yyyy HH:mm:ss" value="#{comprobantePagoController.selected.fechaComp}" title="#{bundle.EditComprobantePagoTitle_fechaComp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateComprobantePagoLabel_idIGV}" for="idIGV" />
+                        <p:selectOneMenu id="idIGV" value="#{comprobantePagoController.selected.idIGV}" required="true" requiredMessage="#{bundle.EditComprobantePagoRequiredMessage_idIGV}">
+                            <f:selectItems value="#{igvController.itemsAvailableSelectOne}"
+                                           var="idIGVItem"
+                                           itemValue="#{idIGVItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateComprobantePagoLabel_idAsociado}" for="idAsociado" />
+                        <p:selectOneMenu id="idAsociado" value="#{comprobantePagoController.selected.idAsociado}" required="true" requiredMessage="#{bundle.EditComprobantePagoRequiredMessage_idAsociado}">
+                            <f:selectItems value="#{asociadoController.itemsAvailableSelectOne}"
+                                           var="idAsociadoItem"
+                                           itemValue="#{idAsociadoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{comprobantePagoController.create}" value="#{bundle.Save}" update="display,:ComprobantePagoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ComprobantePagoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ComprobantePagoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
