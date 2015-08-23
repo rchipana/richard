@@ -18,7 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-//// comentariooooooooooooooooooooooooooooooooooooooooooo jorgito no haace ni mierdaaaaaaaaa
+//// se bororororororororororororororororororororororororororororooror jasjasjajaajaja
 
 @ManagedBean(name = "accesoController")
 @SessionScoped
