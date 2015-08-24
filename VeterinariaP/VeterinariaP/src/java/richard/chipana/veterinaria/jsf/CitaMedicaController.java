@@ -312,7 +312,7 @@ public class CitaMedicaController implements Serializable {
                 }
             }
         }
-        if (selected == null) {
+        if (selected.getIdCitamedica() == null) {
             for (CitaMedica item1 : empleado.getCitaMedicaList()) {
                 if (selected.getFechaInicio().equals(item1.getFechaInicio())) {
                     flag = false;
