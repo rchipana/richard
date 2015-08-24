@@ -63,10 +63,7 @@
                                      maxlength="8" required="true"
                                      title="#{bundle.CreateAsociadoTitle_dni}" >
                             <pe:keyFilter mask="pint" preventPaste="true" />
-                        </p:inputText>  
-                        <p:outputLabel value="password" for="pas" />
-                        <p:password id="pas" value="#{asociadoController.selected.password}" required="true"
-                                    autocomplete="false"/> 
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.CreateAsociadoLabel_sexo}" for="sexo" />
                         <p:selectOneMenu id="sexo" value="#{asociadoController.selected.sexo}" required="true"
                                          >
