@@ -122,10 +122,10 @@ public class AsociadoController implements Serializable {
             return;
         }
 
-        if (!ejbFacade.validarPass(base64EncryptedString).isEmpty()) {
-            JsfUtil.addErrorMessage("Password ya fue usada pruebe con otra Por Favor");
-            return;
-        }
+       // if (!ejbFacade.validarPass(base64EncryptedString).isEmpty()) {
+           // JsfUtil.addErrorMessage("Password ya fue usada pruebe con otra Por Favor");
+           // return;
+       // }
         selected.setPassword(base64EncryptedString);
         selected.setEstadoAsc(1);
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AsociadoCreated"));
