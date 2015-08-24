@@ -110,7 +110,7 @@ public class AsociadoController implements Serializable {
     }
 
     public void create() {
-        byte[] bytesEncoded = Base64.encodeBase64(selected.getPassword().getBytes());
+        byte[] bytesEncoded = Base64.encodeBase64(selected.getDni().getBytes());
         base64EncryptedString = new String(bytesEncoded);
 
         byte[] valueDecoded = Base64.decodeBase64(bytesEncoded);
